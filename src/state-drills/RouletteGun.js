@@ -5,7 +5,8 @@ class RouletteGun extends React.Component {
     super(props)
     this.state = {
       chamber: null,
-      spinningTheChamber: false 
+      spinningTheChamber: false,
+      timer: null
     }
   }
   static defaultProps = {
@@ -19,18 +20,25 @@ class RouletteGun extends React.Component {
       console.log('did timeout');
       let randomNumber = Math.ceil(Math.random() * 8);
       console.log(randomNumber)
-      this.setState = {
+      this.setState({
         chamber: randomNumber,
         spinningTheChamber: false
-      };
-      clearTimeout(timeout)
+      })
     }, 2*1000)
+    this.setState({
+      timer: timeout
+    })
   }
-  render (defaultProps) {
+
+  componentWillUnmount() {
+    clearTimeout(this.state.timer)
+  }
+
+  render () {
     let paragraph;
     if(this.state.spinningTheChamber === true) {
       paragraph = <p>spinning the chamber and pulling the trigger!...</p>
-    } else if(this.state.chamber === defaultProps.bulletInChamber) {
+    } else if(this.state.chamber === this.props.bulletInChamber) {
       paragraph = <p>BANG!!!!</p>
     } else {
       paragraph = <p>you're safe!!</p>
