@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RouletteGun from './state-drills/RouletteGun';
+import Accordion from './state-drills/Accordion';
+import AccordionData from './state-drills/Accordion-data';
 import './index.css';
 
-ReactDOM.render(<RouletteGun />, document.getElementById('root'));
+ReactDOM.render(<Accordion sections={AccordionData.sections} />, document.getElementById('root'));
